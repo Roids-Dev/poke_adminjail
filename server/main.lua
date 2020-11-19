@@ -4,14 +4,24 @@ TriggerEvent("getCore",function(core)
     VorpCore = core
 end)
 
+local isCop = false
+
 RegisterCommand('jail', function(source, args, rawCommand)
     local _source = source
     local User = VorpCore.getUser(_source)
     local group = User.getGroup
-    if group == 'admin' then
+    if Config.CopsAllowed then
+        local Character = VorpCore.getUser(_source).getUsedCharacter
+        local job = Character.job
+            if job == 'police' then
+                isCop = true
+         end
+    end
+    if group == 'admin' or isCop then
         local target_id = args[1]
         local time = tonumber(args[2])
         TriggerClientEvent('poke_adminjail:request', _source, target_id, time)
+        isCop = false
     end
 end, false)
 
@@ -19,7 +29,14 @@ RegisterCommand('unjail', function(source, args, rawCommand)
     local _source = source
     local User = VorpCore.getUser(_source)
     local group = User.getGroup
-    if group == 'admin' then
+    if Config.CopsAllowed then
+        local Character = VorpCore.getUser(_source).getUsedCharacter
+        local job = Character.job
+            if job == 'police' then
+                isCop = true
+         end
+    end
+    if group == 'admin' or isCop then
         local target_id = args[1]
         local steam_id = GetPlayerIdentifiers(target_id)[1]
         local User = VorpCore.getUser(target_id)
