@@ -16,4 +16,4 @@
 - All credit goes to Poke for this amazing script!
 - If you don't want cops to be able to jail with this just set `Config.CopsAllowed`
  to false in the config.
- - By default this version will be in english. If you wish to use spanish instead just rename `es.lua` to `config.lua` and everything will be in spanish again.
+ - By default this version will be in english. If you wish to use spanish instead just rename `config_es.lua` to `config.lua` and everything will be in spanish again.
