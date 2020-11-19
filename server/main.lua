@@ -42,6 +42,7 @@ RegisterCommand('unjail', function(source, args, rawCommand)
         local User = VorpCore.getUser(target_id)
         local CharInfo = User.getUsedCharacter
         local Character = CharInfo.charIdentifier
+            isCop = false
 
         exports.ghmattimysql:execute("DELETE FROM user_jail WHERE identifier = @identifier AND characterid = @characterid", {["@identifier"] = steam_id, ["@characterid"] = Character}, function(result)
             if result ~= nil then
