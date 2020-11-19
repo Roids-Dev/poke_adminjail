@@ -22,7 +22,7 @@ AddEventHandler("poke_adminjail:jail_player", function(time)
             FreezeEntityPosition(ped, true)
             jail_time = time
             jailed = true
-            TriggerEvent("vorp:Tip", 'Has sido encarcelado por '..time_minutes..' minutos', 5000)
+            TriggerEvent("vorp:Tip", Config.Jail1..time_minutes..Config.Jail2, 5000)
             Citizen.Wait(1000)
             FreezeEntityPosition(ped, false)
         end
@@ -34,7 +34,7 @@ AddEventHandler("poke_adminjail:unjail_player", function()
     local local_ped = PlayerPedId()
     local local_player = PlayerId()
 
-    TriggerEvent("vorp:Tip", 'Has salido de prisión, no la lies mas', 5000)
+    TriggerEvent("vorp:Tip", Config.JailRelease, 5000)
     jailed = false
     jail_time = nil
     SetEntityCoords(local_ped, Config.ExitFromJail.x, Config.ExitFromJail.y, Config.ExitFromJail.z)
@@ -44,7 +44,7 @@ end)
 Citizen.CreateThread(function ()
     while true do
         if jailed then
-            DrawTxt('Encarcelado: '..jail_time..' segundos restantes', 0.3, 0.95, 0.4, 0.4, true, 255, 255, 255, 150, false)
+            DrawTxt(Config.JailTime1..jail_time..Config.JailTime2, 0.3, 0.95, 0.4, 0.4, true, 255, 255, 255, 150, false)
         end
         Citizen.Wait(0)
     end

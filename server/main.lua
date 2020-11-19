@@ -47,7 +47,7 @@ RegisterCommand('unjail', function(source, args, rawCommand)
             if result ~= nil then
                 TriggerClientEvent("poke_adminjail:unjail_player", target_id)
             else
-                TriggerClientEvent("vorp:Tip", _source, 'Ha ocurrido un error en esa consulta', 5000)
+                TriggerClientEvent("vorp:Tip", _source, Config.QuerryError, 5000)
             end
         end)
     end
@@ -75,7 +75,7 @@ AddEventHandler("poke_adminjail:jail", function(target_id, time)
         if result ~= nil then
             TriggerClientEvent("poke_adminjail:jail_player", target_id, time)
         else
-            TriggerClientEvent("vorp:Tip", _source, 'Ha ocurrido un error en esa consulta', 5000)
+            TriggerClientEvent("vorp:Tip", _source, Config.QuerryError, 5000)
         end
     end)
 end)
@@ -92,7 +92,7 @@ AddEventHandler("poke_adminjail:unjail", function(target_id)
         if result ~= nil then
             TriggerClientEvent("poke_adminjail:unjail_player", target_id)
         else
-            TriggerClientEvent("vorp:Tip", _source, 'Ha ocurrido un error en esa consulta', 5000)
+            TriggerClientEvent("vorp:Tip", _source, Config.QuerryError, 5000)
         end
     end)
 end)
@@ -133,7 +133,7 @@ AddEventHandler("poke_adminjail:increasetime", function(target_id, time, newtime
             local id = result[1]["id"]
             exports.ghmattimysql:execute("UPDATE user_jail SET time_s = @time_s WHERE id = @id", {["@time_s"] = time + newtime, ["@id"] = id})
             exports.ghmattimysql:execute("UPDATE user_jail SET time = @time WHERE id = @id", {["@time"] = getTime() + time + newtime, ["@id"] = id})
-            TriggerClientEvent("vorp:Tip", _source, 'Se ha aumentado '..newtime..' segundos tu condena, no intentes escapar', 5000)
+            TriggerClientEvent("vorp:Tip", _source, Config.Escape1..newtime..Config.Escape2, 5000)
         end
     end)
 end)
